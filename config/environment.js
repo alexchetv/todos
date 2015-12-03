@@ -6,11 +6,16 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
+	  contentSecurityPolicy: {
+		  'img-src': "'self' data:"
+	  },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-      }
+
+      },
+	    ENABLE_DS_FILTER:true
     },
 
     APP: {
@@ -18,6 +23,7 @@ module.exports = function(environment) {
       // when it is created
     }
   };
+
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;

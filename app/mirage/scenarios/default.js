@@ -1,3 +1,3 @@
 export default function(server) {
-    server.createList('todo', 3);
+  server.createList('todo', 3);
 }
