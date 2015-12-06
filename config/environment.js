@@ -2,14 +2,11 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'todo-mvc',
+    modulePrefix: 'todos',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
-	  contentSecurityPolicy: {
-		  'img-src': "'self' data:"
-	  },
-    EmberENV: {
+	  EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
@@ -45,9 +42,16 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
+	ENV.remote_couch = 'http://localhost:5984/todos';
+	ENV.local_couch = 'todos';
   if (environment === 'production') {
-
+	  ENV.baseURL = '/';
+	  ENV.remote_couch = '??????https://martinic.cloudant.com/todos';
   }
 
+	ENV.contentSecurityPolicy = {
+		'img-src': "'self' data:",
+		'connect-src': "'self' blob: " + ENV.remote_couch.substring(0, ENV.remote_couch.indexOf('/', 9))
+	};
   return ENV;
 };
