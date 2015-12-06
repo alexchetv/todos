@@ -1,6 +1,7 @@
 import DS from 'ember-data';
+import { Model } from 'ember-pouch';
 
-export default DS.Model.extend({
-  title: DS.attr('string'),
-  completed: DS.attr('boolean')
+export default Model.extend({
+	title: DS.attr('string'),
+	completed: DS.attr('boolean')
 });
