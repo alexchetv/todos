@@ -1,9 +1,19 @@
 import config from '../config/environment';
 import PouchDB from 'pouchdb';
 import { Adapter } from 'ember-pouch';
-
+//PouchDB.debug.enable('*');
+PouchDB.debug.disable();
+console.log (PouchDB);
+var username = prompt('Enter username', '');
+var password = prompt('Enter password', '');
 var db = new PouchDB(config.local_couch || 'todos');
-var remote = new PouchDB(config.remote_couch, {ajax: {timeout: 20000}});
+var remote = new PouchDB(config.remote_couch, {
+	ajax: {timeout: 20000},
+	auth:{
+		username: username,
+		password: password
+	}
+});
 
 db.sync(remote, {live: true, retry: true});
 
