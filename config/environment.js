@@ -42,11 +42,12 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-	ENV.remote_couch = 'http://localhost:5984/todos';
+	//ENV.remote_couch = 'http://localhost:5984/todos';
+	ENV.remote_couch = 'http://93.171.138.91:5984/todos';
 	ENV.local_couch = 'todos';
   if (environment === 'production') {
 	  ENV.baseURL = '/';
-	  ENV.remote_couch = '??????https://martinic.cloudant.com/todos';
+	  ENV.remote_couch = 'http://93.171.138.91/todos';
   }
 
 	ENV.contentSecurityPolicy = {
