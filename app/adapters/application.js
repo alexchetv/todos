@@ -3,19 +3,14 @@ import PouchDB from 'pouchdb';
 import { Adapter } from 'ember-pouch';
 //PouchDB.debug.enable('*');
 PouchDB.debug.disable();
-console.log (PouchDB);
-var username = prompt('Enter username', '');
-var password = prompt('Enter password', '');
-var db = new PouchDB(config.local_couch || 'todos');
-var remote = new PouchDB(config.remote_couch, {
-	ajax: {timeout: 20000},
-	auth:{
-		username: username,
-		password: password
-	}
-});
 
-db.sync(remote, {live: true, retry: true});
+
+var db = new PouchDB(config.local_couch || 'todos');
+db.setMaxListeners(20);
+var remote = new PouchDB(config.remote_couch, {
+	skipSetup: true,
+	ajax: {timeout: 20000}
+});
 
 export default Adapter.extend({
 	db: db,
@@ -28,27 +23,33 @@ export default Adapter.extend({
 
 	// Change watcher for ember-data
 	LoadChangedUnloadDeletedRecord: function() {
-		this.db.changes({
-			since: 'now',
-			live: true,
-			returnDocs: false
-		}).on('change', function (change) {
-			//console.log('change',change);
-			var obj = this.db.rel.parseDocID(change.id);
-			// skip changes for non-relational_pouch docs. E.g., design docs.
-			if (!obj.type || obj.type === '') { return; }
+		this.db.replicate.to(remote, {live: true, retry: true});
+		this.db.replicate.from(remote, {live: true, retry: true})
+			.on('change', function (change) {
+				console.log('docs',change.docs);
+				var self = this;
+				change.docs.forEach(function (doc) {
+					console.log('doc',doc);
 
-			//var appController = this.container.lookup("controller:application");
-			//appController.send('kickSpin');
-			if (change.deleted) {
-				var record = this.store.peekRecord(obj.type,obj.id);
-				if (record && !record.get("isDeleted")) {
-					console.log('record',record);
-					record.unloadRecord();
-				}
-			} else {
-				this.store.findRecord(obj.type,obj.id);
-			}
-		}.bind(this));
+					var obj = self.db.rel.parseDocID(doc._id);
+
+					console.log('obj',obj);
+					// skip changes for non-relational_pouch docs. E.g., design docs.
+					if (!obj.type || obj.type === '') { return; }
+
+					//var appController = this.container.lookup("controller:application");
+					//appController.send('kickSpin');
+					if (doc._deleted) {
+						var record = self.store.peekRecord(obj.type,obj.id);
+						if (record && !record.get("isDeleted")) {
+							record.unloadRecord();
+						}
+					} else {
+						console.log('findTodo');
+						self.store.findRecord(obj.type,obj.id);
+					}
+				});
+
+			}.bind(this));
 	}.on('init')
 });
