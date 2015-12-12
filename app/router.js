@@ -10,6 +10,7 @@ Router.map(function() {
     this.route('completed');
     this.route('incompleted');
   });
+  this.route('login');
 });
 
 export default Router;
