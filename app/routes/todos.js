@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+	currentUser: {},
 	beforeModel: function(transition) {
 		let appAdapter = this.store.adapterFor('application');
 		var self = this;
@@ -13,13 +14,18 @@ export default Ember.Route.extend({
 				self.transitionTo('/login');
 			} else {
 				// response.userCtx.name is the current user
-				console.log("user",response.userCtx);
+				self.set("currentUser",{name: response.userCtx.name});
+				console.log("user",response.userCtx.name);
 			}
 		});
 	},
 	model() {
 		console.log('model');
 		return this.store.findAll('todo');
+	},
+	setupController: function(controller, model) {
+		this._super(controller, model);
+		this.controllerFor('application').setProperties({'currentUser': this.currentUser,"currentPageTitle": "todos","currentPageFooter":	"Double-click to edit a todo"});
 	},
 	afterModel: function(posts, transition) {
 		let appAdapter = this.store.adapterFor('application');
