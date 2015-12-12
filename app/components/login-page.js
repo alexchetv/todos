@@ -14,6 +14,7 @@ export default Ember.Component.extend({
 					self.sendAction('goToRoute', 'todos');
 				}).catch(function (err) {
 					console.log('login error', err);
+					alert(err.message);
 				});
 		}
 	}
