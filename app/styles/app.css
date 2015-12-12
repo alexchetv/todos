@@ -72,15 +72,19 @@ input[type="checkbox"] {
 
 #todoapp h1 {
   position: absolute;
-  top: -155px;
+  top: -100px;
   width: 100%;
-  font-size: 100px;
+  font-size: 50px;
   font-weight: 100;
   text-align: center;
   color: rgba(175, 47, 47, 0.15);
   -webkit-text-rendering: optimizeLegibility;
   -moz-text-rendering: optimizeLegibility;
   text-rendering: optimizeLegibility;
+}
+
+span.username {
+    color: rgba(175, 47, 47, 0.50);
 }
 
 #new-todo,
@@ -102,6 +106,48 @@ input[type="checkbox"] {
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   font-smoothing: antialiased;
+}
+
+.loginform {
+    text-align: center;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+.loginform input{
+    position: relative;
+    margin: 10px;
+    width: 50%;
+    font-size: 24px;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: 1.4em;
+    border: 0;
+    outline: none;
+    color: inherit;
+    padding: 6px;
+    border: 1px solid #999;
+    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+#login {
+    font-size: 24px;
+    margin: 10px;
+    width: 50%;
+    padding: 0;
+    cursor: pointer;
+}
+
+#login:hover {
+    text-decoration: underline;
+}
+.loginform fieldset{
+    margin: 10px;
+    border: none;
 }
 
 #new-todo {
@@ -262,6 +308,12 @@ label[for='toggle-all'] {
   border-top: 1px solid #e6e6e6;
 }
 
+.user-info {
+    position: absolute;
+    top: -100px;
+    right: 0;
+}
+
 #todo-count {
   float: left;
   text-align: left;
@@ -317,9 +369,9 @@ html #clear-completed:active {
 }
 
 #info {
-  margin: 65px auto 0;
+  margin: 45px auto 0;
   color: #bfbfbf;
-  font-size: 10px;
+  font-size: 14px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   text-align: center;
 }
