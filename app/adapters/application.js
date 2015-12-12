@@ -8,9 +8,10 @@ PouchDB.debug.disable();
 var db = new PouchDB(config.local_couch || 'todos');
 db.setMaxListeners(20);
 var remote = new PouchDB(config.remote_couch, {
-	skipSetup: false,
+	skipSetup: true,
 	ajax: {timeout: 20000}
 });
+remote.setMaxListeners(20);
 
 export default Adapter.extend({
 	db: db,
