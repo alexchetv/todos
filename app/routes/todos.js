@@ -30,9 +30,11 @@ export default Ember.Route.extend({
 	afterModel: function(posts, transition) {
 		let appAdapter = this.store.adapterFor('application');
 		var self = this;
-		appAdapter.on('ReplicationComplete', function(obj) {
-			console.log("ReplicationComplete",obj);
-			self.transitionTo('/login');
+		appAdapter.on('ReplicationComplete', function(info) {
+			console.log("ReplicationComplete",info);
+			if (info && info.errors[0] && info.errors[0].status == 401) {
+				self.transitionTo('/login');
+			}
 		});
 		appAdapter.startReplication();
 	},
