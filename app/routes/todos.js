@@ -29,13 +29,6 @@ export default Ember.Route.extend({
 	},
 	afterModel: function(posts, transition) {
 		let appAdapter = this.store.adapterFor('application');
-		var self = this;
-		appAdapter.on('ReplicationComplete', function(info) {
-			console.log("ReplicationComplete",info);
-			if (info && info.errors[0] && info.errors[0].status == 401) {
-				self.transitionTo('/login');
-			}
-		});
 		appAdapter.startReplication();
 	},
 	deactivate: function() {
@@ -45,8 +38,9 @@ export default Ember.Route.extend({
 actions: {
 	createTodo(newTitle) {
 		console.log('createTodo');
+		var author = this.controllerFor('application').get('currentUser').name;
 		this.store.createRecord('todo', {
-
+			createdBy: author,
 			title: newTitle,
 			completed: false
 		}).save();
