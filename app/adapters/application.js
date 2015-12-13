@@ -19,5 +19,5 @@ export default Adapter.extend({
 		console.log("ReplicationDenied",err);
 		alert(err.err.name+" : "+ err.err.reason + "\nSynchronization stopped!\nRollup last changes and reload page!");
 		this.stopReplication();
-	}.on("ReplicationDenied"),
+	}.on("ReplicationDenied")
 });
