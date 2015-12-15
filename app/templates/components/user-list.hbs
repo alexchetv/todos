@@ -1,0 +1,19 @@
+<section id="main">
+	{{yield}}
+	<div class="indicator-base"></div>
+	{{refresh-indicator}}
+</section>
+
+<footer id="footer">
+	<ul id="filters">
+		<li>
+			{{#link-to "users.index" activeClass="selected"}}All{{/link-to}}
+		</li>
+		<li>
+			{{#link-to "users.masters" activeClass="selected"}}Masters{{/link-to}}
+		</li>
+		<li>
+			{{#link-to "users.slaves" activeClass="selected"}}Slaves{{/link-to}}
+		</li>
+	</ul>
+</footer>

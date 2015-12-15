@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('incompleted');
   });
   this.route('login');
+  this.route('users');
 });
 
 export default Router;
