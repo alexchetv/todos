@@ -16,22 +16,6 @@ export default Ember.Component.extend({
 	hasCompleted: Ember.computed('completedCount', function() {
 		return this.get('completedCount') > 0;
 	}),
-	/*didInsertElement() {
-	let todos = this.get('todos');
-	if (todos.get('length') > 0 && todos.isEvery('completed', true)) {
-		this.set('allAreDone', true);
-	} else {
-		this.set('allAreDone', false);
-	}
-},
-allAreDoneObserver: Ember.observer('allAreDone', function() {
-	let completeValue = this.get('allAreDone');
-	let todos = this.get('todos');
-	todos.forEach((todo) => {
-		todo.set('completed', completeValue)
-	this.sendAction('updateTodo', todo);
-});
-}),*/
 	allAreDone:Ember.computed('todos.@each.completed', {
 		get(key) {
 			let todos = this.get('todos');
@@ -48,11 +32,11 @@ allAreDoneObserver: Ember.observer('allAreDone', function() {
 	}),
 	actions: {
 		clearCompleted() {
-	let completed = this.get('todos').filterBy('completed', true);
-	completed.forEach((todo) => {
-		this.sendAction('deleteTodo', todo);
-});
-}
-}
+			let completed = this.get('todos').filterBy('completed', true);
+			completed.forEach((todo) => {
+				this.sendAction('deleteTodo', todo);
+			});
+		}
+	}
 });
 
