@@ -311,7 +311,7 @@ label[for='toggle-all'] {
   border-top: 1px solid #e6e6e6;
 }
 
-.user-info {
+.top-menu {
     position: absolute;
     top: -100px;
     right: 0;
