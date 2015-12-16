@@ -5,7 +5,7 @@ export default Ember.Component.extend({
 	store: Ember.inject.service(),
 	actions: {
 		authenticate() {
-			self = this;
+			var self = this;
 			const { login, password } = this.getProperties('login', 'password');
 			let appAdapter = this.get('store').adapterFor('application');
 			appAdapter.remote.login(login, password)
