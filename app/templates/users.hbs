@@ -1,4 +1,4 @@
-{{log-out goToRoute="goToRoute"}}
+<div class="top-menu">{{#link-to "todos"}}Todos{{/link-to}} {{#link-to "login"}}Logout{{/link-to}}</div>
 {{user-create action="createUser"}}
 {{#user-list users=model}}
 	{{outlet}}
