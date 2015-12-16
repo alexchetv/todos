@@ -1,0 +1,6 @@
+<form class="loginform" {{action 'createUser' on='submit'}}>
+	{{input id="username" maxlength=15 value=newname placeholder='Login'}}
+	{{input id="password" maxlength=15 value=newpassword placeholder='Password' type='password'}}
+	{{input type='checkbox' checked=isAdmin class="toggle"}}
+	<button id="login" type="submit">Create</button>
+</form>
