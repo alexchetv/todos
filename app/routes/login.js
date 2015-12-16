@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 	beforeModel:function(transition) {
-		self = this;
+		var self = this;
 		let appAdapter = this.get('store').adapterFor('application');
 		appAdapter.remote.logout()
 			.then(function (info) {
