@@ -15,7 +15,7 @@ export default Ember.Route.extend({
 			} else {
 				// response.userCtx.name is the current user
 				self.set("currentUser",{name: response.userCtx.name});
-				console.log("user",response.userCtx.name);
+				console.log("user",response.userCtx);
 			}
 		});
 	},
